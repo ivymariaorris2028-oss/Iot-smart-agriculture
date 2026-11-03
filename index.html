@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT-Based Smart Agriculture System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .glass-panel { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card { background: rgba(51, 65, 85, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .accent-gradient { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .accent-text { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                        <i class="fa-solid fa-leaf text-xl"></i>
+                    </div>
+                    <span class="font-bold text-lg text-white">SmartAgri <span class="text-emerald-400">IoT</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                    <a href="#overview" class="hover:text-emerald-400 transition-colors">Overview</a>
+                    <a href="#simulator" class="hover:text-emerald-400 transition-colors">Live Demo</a>
+                    <a href="#architecture" class="hover:text-emerald-400 transition-colors">Architecture</a>
+                    <a href="#comparison" class="hover:text-emerald-400 transition-colors">Comparison</a>
+                    <a href="#roadmap" class="hover:text-emerald-400 transition-colors">Roadmap</a>
+                </div>
+                <div>
+                    <a href="#simulator" class="px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 transition-all">
+                        Launch Simulator
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="overview" class="relative py-20 overflow-hidden border-b border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>SENSE • CONNECT • AUTOMATE</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        IoT-Based Smart <br/><span class="accent-text">Agriculture System</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-slate-400 max-w-2xl">
+                        Sensing, wireless communication, and cloud automation for precision farming. Automated irrigation powered by ESP32 microcontrollers and MQTT data telemetry.
+                    </p>
+                    
+                    <div class="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-slate-300">
+                        <div class="p-3 rounded-lg glass-card">
+                            <span class="block text-slate-400 font-medium">Christeena K Peter</span>
+                        </div>
+                        <div class="p-3 rounded-lg glass-card">
+                            <span class="block text-slate-400 font-medium">Delna Theresa Domanic</span>
+                        </div>
+                        <div class="p-3 rounded-lg glass-card">
+                            <span class="block text-slate-400 font-medium">Ivy Maria Orris</span>
+                        </div>
+                        <div class="p-3 rounded-lg glass-card">
+                            <span class="block text-slate-400 font-medium">Mariam Shafeek</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="glass-panel p-8 rounded-2xl border border-emerald-500/20 relative">
+                        <div class="text-emerald-400 text-5xl font-black mb-2">~70%</div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            of global freshwater withdrawals go to agriculture (FAO). Smart IoT monitoring prevents over-irrigation and conserves resources.
+                        </p>
+                        <div class="space-y-2 text-xs text-slate-400 border-t border-slate-700/60 pt-4">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-emerald-400"></i>
+                                <span>Real-time soil & climate monitoring</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-emerald-400"></i>
+                                <span>Autonomous threshold-driven pump relay</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-emerald-400"></i>
+                                <span>Offline local feedback control protection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Interactive Hardware Simulator & Live Dashboard -->
+    <section id="simulator" class="py-16 bg-slate-900/50 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-white">Interactive Hardware Simulator</h2>
+                <p class="text-slate-400 text-sm mt-2">Adjust live sensor inputs to test how the ESP32 local control loop triggers the irrigation pump relay autonomously.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Controls -->
+                <div class="lg:col-span-5 glass-panel p-6 rounded-2xl space-y-6">
+                    <h3 class="text-lg font-semibold text-white flex items-center justify-between border-b border-slate-700/50 pb-3">
+                        <span>Sensor Inputs</span>
+                        <span class="text-xs font-mono text-emerald-400 px-2 py-1 rounded bg-emerald-500/10">ESP32 Node #01</span>
+                    </h3>
+
+                    <!-- Soil Moisture Slider -->
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-2">
+                            <span class="text-slate-300">Soil Moisture (%)</span>
+                            <span id="moistureVal" class="text-emerald-400 font-mono">35%</span>
+                        </div>
+                        <input type="range" id="moistureSlider" min="0" max="100" value="35" class="w-full accent-emerald-500 bg-slate-700 rounded-lg h-2 cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                            <span>Dry (< 40% Triggers Pump)</span>
+                            <span>Wet</span>
+                        </div>
+                    </div>
+
+                    <!-- Temperature Slider -->
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-2">
+                            <span class="text-slate-300">Temperature (°C)</span>
+                            <span id="tempVal" class="text-amber-400 font-mono">28°C</span>
+                        </div>
+                        <input type="range" id="tempSlider" min="10" max="50" value="28" class="w-full accent-amber-500 bg-slate-700 rounded-lg h-2 cursor-pointer">
+                    </div>
+
+                    <!-- Humidity Slider -->
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-2">
+                            <span class="text-slate-300">Humidity (%)</span>
+                            <span id="humidityVal" class="text-cyan-400 font-mono">65%</span>
+                        </div>
+                        <input type="range" id="humiditySlider" min="10" max="100" value="65" class="w-full accent-cyan-500 bg-slate-700 rounded-lg h-2 cursor-pointer">
+                    </div>
+
+                    <!-- Rain Sensor Toggle -->
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-700/40">
+                        <span class="text-xs font-semibold text-slate-300">Rain Sensor (DHT11/Digital)</span>
+                        <button id="rainBtn" class="px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-600 bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors">
+                            No Rain Detected
+                        </button>
+                    </div>
+
+                    <!-- Internet Link Simulation -->
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-700/40">
+                        <span class="text-xs font-semibold text-slate-300">Cloud Connectivity</span>
+                        <button id="netBtn" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                            Online (Wi-Fi/MQTT)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Outputs & Telemetry -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <div class="glass-panel p-4 rounded-xl border border-slate-800">
+                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">Pump Relay</span>
+                            <div id="pumpStatus" class="inline-flex items-center space-x-2 text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span>PUMP ON</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-4 rounded-xl border border-slate-800">
+                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">MQTT Telemetry</span>
+                            <div id="mqttStatus" class="text-xs font-mono text-cyan-400 truncate">
+                                farm/node01/data
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-4 rounded-xl border border-slate-800 col-span-2 sm:col-span-1">
+                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">Local Control Loop</span>
+                            <div class="text-xs font-semibold text-slate-200">
+                                ESP32 Active
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Chart -->
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Live Moisture Trend Telemetry</h4>
+                        <div class="h-48">
+                            <canvas id="telemetryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- MQTT Console -->
+                    <div class="glass-panel p-4 rounded-xl border border-slate-800 font-mono text-[11px]">
+                        <div class="text-slate-400 mb-1 font-sans font-semibold text-xs">Live MQTT Packet Stream (Port 8883 - TLS):</div>
+                        <div id="mqttLogs" class="bg-slate-950 p-2.5 rounded-lg h-20 overflow-y-auto space-y-1 text-slate-300 border border-slate-800">
+                            <div>[INFO] Connected to MQTT broker (TLS encrypted).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Architecture -->
+    <section id="architecture" class="py-16 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-white">Three-Layer System Architecture</h2>
+                <p class="text-slate-400 text-sm mt-2">End-to-end integration from physical soil sensors to cloud dashboards.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Application Layer -->
+                <div class="glass-panel p-6 rounded-2xl border-t-4 border-emerald-500 space-y-4">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">1</div>
+                    <h3 class="text-lg font-bold text-white">Application Layer</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Cloud analytics, interactive web & mobile dashboards, ThingSpeak/Blynk data logging, and automated alert dispatching.
+                    </p>
+                    <ul class="text-xs text-slate-300 space-y-1.5 pt-2 border-t border-slate-800">
+                        <li>• Real-time Data Visualization</li>
+                        <li>• Weather API Integrations</li>
+                        <li>• Custom Decision Thresholds</li>
+                    </ul>
+                </div>
+
+                <!-- Network Layer -->
+                <div class="glass-panel p-6 rounded-2xl border-t-4 border-cyan-500 space-y-4">
+                    <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">2</div>
+                    <h3 class="text-lg font-bold text-white">Network Layer</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Wi-Fi 802.11 star topology for small farms, LoRa gateways for expansive multi-kilometer agricultural fields, and TLS-encrypted MQTT protocol.
+                    </p>
+                    <ul class="text-xs text-slate-300 space-y-1.5 pt-2 border-t border-slate-800">
+                        <li>• MQTT over TCP/IP (Port 8883)</li>
+                        <li>• Wi-Fi / LoRa / 4G Fallback</li>
+                        <li>• Lightweight Pub/Sub Payload</li>
+                    </ul>
+                </div>
+
+                <!-- Perception Layer -->
+                <div class="glass-panel p-6 rounded-2xl border-t-4 border-amber-500 space-y-4">
+                    <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">3</div>
+                    <h3 class="text-lg font-bold text-white">Perception Layer</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Physical sensors and actuators linked directly to the ESP32 microcontroller via GPIO, I2C, and 1-Wire interfaces.
+                    </p>
+                    <ul class="text-xs text-slate-300 space-y-1.5 pt-2 border-t border-slate-800">
+                        <li>• Soil Moisture & DHT11 Temp/Humidity</li>
+                        <li>• Rain & Water Level Sensors</li>
+                        <li>• Optocoupled Water Pump Relays</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison" class="py-16 bg-slate-900/40 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-white">Traditional vs. IoT Smart Farming</h2>
+                <p class="text-slate-400 text-sm mt-2">How automated sensing outperforms legacy manual methods.</p>
+            </div>
+
+            <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-800/80 text-slate-200 uppercase tracking-wider font-semibold">
+                            <tr>
+                                <th class="p-4">Aspect</th>
+                                <th class="p-4">Traditional Farming</th>
+                                <th class="p-4 text-emerald-400">Our IoT Smart System</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800">
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Monitoring</td>
+                                <td class="p-4 text-slate-400">Manual field visits</td>
+                                <td class="p-4 text-emerald-400 font-medium">Real-time, remote, 24x7 continuous telemetry</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Irrigation</td>
+                                <td class="p-4 text-slate-400">Fixed schedule or by visual guesswork</td>
+                                <td class="p-4 text-emerald-400 font-medium">Sensor-triggered, fully automatic pump relay</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Water Utilization</td>
+                                <td class="p-4 text-slate-400">High wastage due to overwatering</td>
+                                <td class="p-4 text-emerald-400 font-medium">Targeted delivery only when soil moisture drops below threshold</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Data & Analytics</td>
+                                <td class="p-4 text-slate-400">None, or handwritten logbooks</td>
+                                <td class="p-4 text-emerald-400 font-medium">Logged securely in cloud databases for yield analysis</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Crop Stress Response</td>
+                                <td class="p-4 text-slate-400">Delayed, noticed only after physical wilting</td>
+                                <td class="p-4 text-emerald-400 font-medium">Instant automated response & real-time mobile alerts</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Scope & Roadmap -->
+    <section id="roadmap" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-white">Future Enhancements & Scope</h2>
+                <p class="text-slate-400 text-sm mt-2">Scaling from prototype to intelligent, autonomous eco-farming.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-emerald-400 text-lg"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="font-bold text-white text-sm">AI / ML Predictive Analytics</h3>
+                    <p class="text-xs text-slate-400">Machine learning models to forecast exact irrigation needs, crop yield, and disease risks.</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-emerald-400 text-lg"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+                    <h3 class="font-bold text-white text-sm">Weather API Integration</h3>
+                    <p class="text-xs text-slate-400">Skip automated watering cycles if rain forecasts predict natural precipitation within hours.</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-emerald-400 text-lg"><i class="fa-solid fa-solar-panel"></i></div>
+                    <h3 class="font-bold text-white text-sm">Solar-Powered Nodes</h3>
+                    <p class="text-xs text-slate-400">Energy-harvesting solar modules and deep-sleep modes for continuous, off-grid field operation.</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-emerald-400 text-lg"><i class="fa-solid fa-[#000]"></i><i class="fa-solid fa-tower-cell"></i></div>
+                    <h3 class="font-bold text-white text-sm">LoRaWAN & NB-IoT</h3>
+                    <p class="text-xs text-slate-400">Long-range wireless mesh connectivity extending control over several square kilometers.</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-emerald-400 text-lg"><i class="fa-solid fa-plane-up"></i></div>
+                    <h3 class="font-bold text-white text-sm">Drone Monitoring</h3>
+                    <p class="text-xs text-slate-400">Aerial multispectral crop-health imaging integrated into the central management cloud.</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-emerald-400 text-lg"><i class="fa-solid fa-microchip"></i></div>
+                    <h3 class="font-bold text-white text-sm">Edge Computing</h3>
+                    <p class="text-xs text-slate-400">On-device neural inference for immediate local actions without reliance on cloud roundtrips.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-8 glass-panel border-t border-slate-800 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>IoT-Based Smart Agriculture System Project • Created by Christeena K Peter, Delna Theresa Domanic, Ivy Maria Orris, & Mariam Shafeek</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // State Variables
+        let moisture = 35;
+        let temp = 28;
+        let humidity = 65;
+        let isRaining = false;
+        let isOnline = true;
+
+        // UI Elements
+        const moistureSlider = document.getElementById('moistureSlider');
+        const moistureVal = document.getElementById('moistureVal');
+        const tempSlider = document.getElementById('tempSlider');
+        const tempVal = document.getElementById('tempVal');
+        const humiditySlider = document.getElementById('humiditySlider');
+        const humidityVal = document.getElementById('humidityVal');
+        const rainBtn = document.getElementById('rainBtn');
+        const netBtn = document.getElementById('netBtn');
+        const pumpStatus = document.getElementById('pumpStatus');
+        const mqttLogs = document.getElementById('mqttLogs');
+
+        // Chart Setup
+        const ctx = document.getElementById('telemetryChart').getContext('2d');
+        const labels = Array.from({length: 15}, (_, i) => `${15 - i}s ago`).reverse();
+        const moistureData = Array(15).fill(35);
+
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Soil Moisture (%)',
+                    data: moistureData,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 2,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+                    x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { size: 10 } } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Update Control Logic
+        function updateLogic() {
+            // Pump threshold logic: turn pump ON if moisture < 40% AND not raining
+            const shouldPumpBeOn = moisture < 40 && !isRaining;
+
+            if (shouldPumpBeOn) {
+                pumpStatus.className = 'inline-flex items-center space-x-2 text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+                pumpStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span>PUMP ON</span>';
+            } else {
+                pumpStatus.className = 'inline-flex items-center space-x-2 text-xs font-bold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700';
+                pumpStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-slate-500"></span><span>PUMP OFF</span>';
+            }
+
+            // Push log if online
+            if (isOnline) {
+                const timeStr = new Date().toLocaleTimeString();
+                const logItem = document.createElement('div');
+                logItem.innerHTML = `<span class="text-slate-500">[${timeStr}]</span> PUB <span class="text-emerald-400">farm/node01/data</span> -> {"moist": ${moisture}, "temp": ${temp}, "hum": ${humidity}, "pump": ${shouldPumpBeOn ? 1 : 0}}`;
+                mqttLogs.prepend(logItem);
+                if (mqttLogs.children.length > 20) mqttLogs.removeChild(mqttLogs.lastChild);
+            }
+        }
+
+        // Event Listeners
+        moistureSlider.addEventListener('input', (e) => {
+            moisture = parseInt(e.target.value);
+            moistureVal.textContent = `${moisture}%`;
+            updateLogic();
+        });
+
+        tempSlider.addEventListener('input', (e) => {
+            temp = parseInt(e.target.value);
+            tempVal.textContent = `${temp}°C`;
+            updateLogic();
+        });
+
+        humiditySlider.addEventListener('input', (e) => {
+            humidity = parseInt(e.target.value);
+            humidityVal.textContent = `${humidity}%`;
+            updateLogic();
+        });
+
+        rainBtn.addEventListener('click', () => {
+            isRaining = !isRaining;
+            if (isRaining) {
+                rainBtn.className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/40';
+                rainBtn.textContent = 'Raining Active';
+            } else {
+                rainBtn.className = 'px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-600 bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors';
+                rainBtn.textContent = 'No Rain Detected';
+            }
+            updateLogic();
+        });
+
+        netBtn.addEventListener('click', () => {
+            isOnline = !isOnline;
+            if (isOnline) {
+                netBtn.className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+                netBtn.textContent = 'Online (Wi-Fi/MQTT)';
+            } else {
+                netBtn.className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/40';
+                netBtn.textContent = 'Offline (Local Loop Only)';
+                const logItem = document.createElement('div');
+                logItem.className = 'text-rose-400';
+                logItem.innerHTML = `[WARN] Internet lost! ESP32 operating in offline autonomous threshold mode.`;
+                mqttLogs.prepend(logItem);
+            }
+        });
+
+        // Real-time Chart Loop
+        setInterval(() => {
+            chart.data.datasets[0].data.shift();
+            chart.data.datasets[0].data.push(moisture);
+            chart.update('none');
+        }, 1500);
+
+        // Initial Run
+        updateLogic();
+    </script>
+</body>
+</html>
